@@ -1,0 +1,10 @@
+name: SamVerify
+main: com.sorenstudios.samverify.SamVerify
+version: ${version}
+
+commands:
+   register:
+      description: Generate an authentication code for a player.
+      usage: /<command> [player]
+      permission: <plugin name>.basic
+      permission-message: You don't have <permission>
