@@ -1,6 +1,1 @@
-mysql:
-    user: example
-    pass: example
-    db: example
-    host: example.com
-    port: 3306
+

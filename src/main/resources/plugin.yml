@@ -1,10 +1,15 @@
-name: SamVerify
-main: com.sorenstudios.samverify.SamVerify
+name: Turtleduck
+main: com.sorenstudios.turtleduck.Turtleduck
 version: ${version}
 
 commands:
-   register:
-      description: Generate an authentication code for a player.
-      usage: /<command> [username]
-      permission: <plugin name>.basic
-      permission-message: You don't have <permission>
+   sos:
+      description: Contacts the admins ASAP.
+      usage: /sos [message]
+      permission: turtleduck.sos
+      permission-message: You don't have permission to contact the admins.
+   batsignal:
+      description: Alias for /sos.
+      usage: /batsignal [message]
+      permissions: turtleduck.sos
+      permission-message: You don't have permission to contact the admins.
