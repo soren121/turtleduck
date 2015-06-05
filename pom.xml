@@ -2,7 +2,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sorenstudios</groupId>
-    <artifactId>samverify</artifactId>
+    <artifactId>turtleduck</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <build>
         <plugins>
@@ -19,17 +19,20 @@
     </build>
     <repositories>
         <repository>
-            <id>bukkit-repo</id>
+            <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
     <dependencies>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.8-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+		          <groupId>org.spigotmc</groupId>
+		          <artifactId>spigot-api</artifactId>
+		          <version>1.8.3-R0.1-SNAPSHOT</version>
+		</dependency>
     </dependencies>
+    <scm>
+    	<developerConnection>scm:git:ssh://git@github.com:soren121/turtleduck.git</developerConnection>
+    	<connection>https://github.com/soren121/turtleduck.git</connection>
+    	<url>https://github.com/soren121/turtleduck</url>
+    </scm>
 </project>
