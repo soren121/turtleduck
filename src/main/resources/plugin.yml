@@ -9,12 +9,12 @@ main: com.sorenstudios.turtleduck.Turtleduck
 commands:
     sos:
         description: Contacts the admins ASAP.
-        usage: /sos [message]
-        aliases: [batsignal]
+        usage: /<command> [message]
+        aliases: batsignal
         permission: turtleduck.sos
         permission-message: You don't have permission to contact the admins.
       
 permissions:
     turtleduck.sos:
         description: Allows a player to contact the admins immediately.
-        default: false
+        default: op

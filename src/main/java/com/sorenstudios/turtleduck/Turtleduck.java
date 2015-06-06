@@ -19,7 +19,8 @@ public final class Turtleduck extends JavaPlugin {
     
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if ((cmd.getName().equalsIgnoreCase("sos") || cmd.getName().equalsIgnoreCase("batsignal")) && args.length == 1) {
+        String command = cmd.getName();
+        if ((command.equalsIgnoreCase("sos") || command.equalsIgnoreCase("batsignal")) && args.length > 0) {
             Player player = (Player) sender;
             player.sendMessage("<Fluttershy> yay");
             
