@@ -28,22 +28,29 @@ public class Turtleduck extends JavaPlugin {
     public void onEnable() {
     	// Save config if it isn't there already
     	this.saveDefaultConfig();
-    	// Load config
-    	FileConfiguration config = this.getConfig();
+        
+        registerCommands();
 		
         getLogger().info("Loaded successfully!");
-        
+    }
+    
+    private void registerCommands() {
         CommandExecutor sendMessage = (sender, cmd, label, args) -> {
             if(args.length > 0) {
-                sender.sendMessage("<Fluttershy> yay");
-                return true;
+                String message = String.join(" ", args);
+                
+                FileConfiguration config = this.getConfig();
+                String postUrl = config.getString("postUrl");
+                String hmacKey = config.getString("hmacKey");
+                MessageSender ms = new MessageSender(postUrl, hmacKey);
+                
+                return ms.send(message);
             }
             return false;
         };
         
         getCommand("sos").setExecutor(sendMessage);
         getCommand("batsignal").setExecutor(sendMessage);
-        getCommand("brrng").setExecutor(sendMessage);
     }
     
 }
