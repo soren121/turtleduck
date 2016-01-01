@@ -44,9 +44,12 @@ public class Turtleduck extends JavaPlugin {
                 FileConfiguration config = this.getConfig();
                 String postUrl = config.getString("postUrl");
                 String hmacKey = config.getString("hmacKey");
-                MessageSender ms = new MessageSender(postUrl, hmacKey);
+                MessageSender ms = new MessageSender(postUrl, hmacKey, getLogger());
                 
-                return ms.send(message);
+                if(!ms.send(message)) {
+                    sender.sendMessage(ChatColor.RED + "Message failed to send.");
+                }
+                return true;
             }
             return false;
         };

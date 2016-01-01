@@ -28,6 +28,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.http.HttpResponse;
@@ -44,10 +45,12 @@ public class MessageSender {
     
     private String postUrl;
     private String hmacKey;
+    private Logger logger;
     
-    public MessageSender(String postUrl, String hmacKey) {
+    public MessageSender(String postUrl, String hmacKey, Logger logger) {
         this.postUrl = postUrl;
         this.hmacKey = hmacKey;
+        this.logger = logger;
     }
     
     private String toHexString(byte[] bytes) {
@@ -104,6 +107,7 @@ public class MessageSender {
             HttpResponse response = httpClient.execute(httpPost);
             StatusLine statusLine = response.getStatusLine();
             if (statusLine.getStatusCode() >= 300) {
+                this.logger.severe("Message response was " + statusLine.getStatusCode());
                 return false;
             }
         }
