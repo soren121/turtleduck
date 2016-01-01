@@ -18,8 +18,10 @@
 
 package com.sorenstudios.turtleduck;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class Turtleduck extends JavaPlugin {
@@ -49,8 +51,19 @@ public class Turtleduck extends JavaPlugin {
             return false;
         };
         
+        CommandExecutor say = (sender, cmd, label, args) -> {
+            if(sender instanceof ConsoleCommandSender && args.length == 2) {
+                String name = ChatColor.BLUE + "[TD:" + args[0] + "] ";
+                sender.sendMessage(name + ChatColor.WHITE + args[1]);
+
+                return true;
+            }
+            return false;
+        };
+        
         getCommand("sos").setExecutor(sendMessage);
         getCommand("batsignal").setExecutor(sendMessage);
+        getCommand("tdsay").setExecutor(say);
     }
     
 }
