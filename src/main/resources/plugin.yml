@@ -1,20 +1,18 @@
 name: Turtleduck
 version: 0.0.1-SNAPSHOT
-load: STARTUP
-author: Nicholas Narsing <soren121@sorenstudios.com>
-website: https://www.github.com/soren121/turtleduck
+author: soren121
+website: https://github.com/soren121/turtleduck
 
 main: com.sorenstudios.turtleduck.Turtleduck
 
 commands:
     sos:
-        description: Contacts the admins ASAP.
+        description: "Contacts the admins for...emergencies, hopefully."
         usage: /<command> [message]
         aliases: batsignal
         permission: turtleduck.sos
-        permission-message: You don't have permission to contact the admins.
+        permission-message: "You don't have permission to contact the admins."
       
 permissions:
     turtleduck.sos:
-        description: Allows a player to contact the admins immediately.
-        default: op
+        description: "Allows a player to contact the admins immediately."
