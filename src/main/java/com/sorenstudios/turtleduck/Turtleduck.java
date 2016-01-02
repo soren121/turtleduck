@@ -18,9 +18,14 @@
 
 package com.sorenstudios.turtleduck;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -44,13 +49,23 @@ public class Turtleduck extends JavaPlugin {
                 FileConfiguration config = this.getConfig();
                 String postUrl = config.getString("postUrl");
                 String hmacKey = config.getString("hmacKey");
-                MessageSender ms = new MessageSender(postUrl, hmacKey, getLogger());
+                String username = (sender instanceof Player) ? sender.getName() : "Console";
                 
-                if(!ms.send(message)) {
+                List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+                params.add(new BasicNameValuePair("message", message));
+                params.add(new BasicNameValuePair("username", username)); 
+                
+                MessageSender ms = new MessageSender(postUrl, hmacKey, getLogger());
+                if(!ms.send(params)) {
                     sender.sendMessage(ChatColor.RED + "Message failed to send.");
                 }
+                else {
+                    sender.sendMessage(ChatColor.GREEN + "Message sent!");
+                }
+                
                 return true;
             }
+            
             return false;
         };
         
@@ -70,6 +85,7 @@ public class Turtleduck extends JavaPlugin {
                     return false;
                 }
             }
+            
             return true;
         };
         

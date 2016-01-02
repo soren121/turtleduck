@@ -25,7 +25,6 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 import java.util.logging.Logger;
@@ -39,7 +38,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 
 public class MessageSender {
     
@@ -61,6 +59,20 @@ public class MessageSender {
 		}
 
 		return formatter.toString();
+    }
+    
+    private String buildBodyString(List<NameValuePair> params) {
+        String query = "";
+        for(NameValuePair param : params) {
+            query += param.getName() + "=" + param.getValue() + "&";
+        }
+        
+        // Remove trailing ampersand
+        if(query.length() > 0) {
+            query = query.substring(0, query.length() - 1);
+        }
+        
+        return query;
     }
     
     private URI generateUri(String body) {
@@ -89,12 +101,12 @@ public class MessageSender {
         }
     }
     
-    public boolean send(String message) {
+    public boolean send(List<NameValuePair> params) {
         HttpClient httpClient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(generateUri("message=" + message));
-
-        List<NameValuePair> params = new ArrayList<NameValuePair>(1);
-        params.add(new BasicNameValuePair("message", message));
+        
+        String bodyString = buildBodyString(params);
+        HttpPost httpPost = new HttpPost(generateUri(bodyString));
+        
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
         }
