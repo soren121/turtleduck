@@ -38,7 +38,7 @@ public class Turtleduck extends JavaPlugin {
     
     private void registerCommands() {
         CommandExecutor sendMessage = (sender, cmd, label, args) -> {
-            if(args.length > 0) {
+            if(args.length >= 1) {
                 String message = String.join(" ", args);
                 
                 FileConfiguration config = this.getConfig();
@@ -54,19 +54,28 @@ public class Turtleduck extends JavaPlugin {
             return false;
         };
         
-        CommandExecutor say = (sender, cmd, label, args) -> {
-            if(sender instanceof ConsoleCommandSender && args.length == 2) {
-                String name = ChatColor.BLUE + "[TD:" + args[0] + "] ";
-                sender.sendMessage(name + ChatColor.WHITE + args[1]);
-
-                return true;
+        CommandExecutor broadcast = (sender, cmd, label, args) -> {
+            if(sender instanceof ConsoleCommandSender) {
+                if(args.length >= 2) {
+                    String message = "";
+                    for(int i = 1; i < args.length; i++) {
+                        message += args[i];
+                        if(i < args.length - 1) message += " ";
+                    }
+                    
+                    String name = ChatColor.BLUE + "[TD:" + args[0] + "] ";
+                    getServer().broadcastMessage(name + ChatColor.WHITE + message);
+                }
+                else {
+                    return false;
+                }
             }
-            return false;
+            return true;
         };
         
         getCommand("sos").setExecutor(sendMessage);
         getCommand("batsignal").setExecutor(sendMessage);
-        getCommand("tdsay").setExecutor(say);
+        getCommand("tdsay").setExecutor(broadcast);
     }
     
 }
