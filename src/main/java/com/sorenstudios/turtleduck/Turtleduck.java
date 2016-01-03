@@ -78,7 +78,7 @@ public class Turtleduck extends JavaPlugin {
                         if(i < args.length - 1) message += " ";
                     }
                     
-                    String name = ChatColor.BLUE + "[TD:" + args[0] + "] ";
+                    String name = ChatColor.AQUA + "<TD:" + args[0] + "> ";
                     getServer().broadcastMessage(name + ChatColor.WHITE + message);
                 }
                 else {
