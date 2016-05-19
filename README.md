@@ -16,7 +16,11 @@ Runtime requirements:
 Compile requirements:
  * Java JDK 8u40+.
  * Maven 3.2+.
+ 
+## Installation
 
-### License
+See INSTALL.md for instructions.
 
-Licensed under the GNU LGPL v3 (or, at your option, any later version.) See LICENSE.txt for more info.
+## License
+
+Licensed under the GNU GPL v3 (or, at your option, any later version.) See LICENSE.txt for more info.

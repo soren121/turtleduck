@@ -1,0 +1,7 @@
+{
+    "require": {
+        "xpaw/php-minecraft-query": "1.0.*",
+        "xpaw/php-source-query-class": "1.0.*",
+        "guzzlehttp/guzzle": "^6.1"
+    }
+}
