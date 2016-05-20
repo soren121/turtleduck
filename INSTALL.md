@@ -12,7 +12,7 @@ for your new bot.
  [Instructions can be found here.](https://core.telegram.org/bots#6-botfather)
  2. Save the API token that the bot gives you. You'll need it later.
  
-### Step 2: Generate the HMAC Signing Key
+### Step 2: Generate the HMAC signing key
 Turtleduck uses a 16-byte hexadecimal key to sign its internal requests. This 
 ensures that outsiders cannot abuse Turtleduck to spam your Minecraft server 
 chat or your registered Telegram chats.
@@ -22,14 +22,14 @@ chat or your registered Telegram chats.
  generate a key. (You will need Python 2 or 3 installed.)
  2. Save the generated HMAC key for later.
  
-### Step 3: Install the Web Component
+### Step 3: Install the web component
  1. Extract the contents of the web-component directory to a 
  publicly-accessible directory on your web server.
  2. Install [Composer](https://getcomposer.org/) if you haven't already.
  3. Open a shell where you extracted the web-component directory.
  4. Run `composer install` to download the requisite dependencies.
 
-### Step 4: Database Setup
+### Step 4: Database setup
  1. Create a new database on your MySQL server, if you wish.
  2. Import the `install.sql` file from the web-component directory into your 
  MySQL database.
@@ -37,8 +37,12 @@ chat or your registered Telegram chats.
  table. The username column is the Telegram username you wish to allow, and 
  you don't need to set anything in the *date_added* column (it will be 
  updated automatically.)
+     - You can execute this SQL query to add allowed users:  
+    `INSERT INTO turtleduck_allowed_users VALUES('MyUsername', NULL);`
+     
+     Just remember to replace *MyUsername* with the username you wish to allow.
 
-### Step 5: Spigot Configuration
+### Step 5: Spigot configuration
  1. Open your Spigot server's `server.properties` file.
  2. Enable RCON.
      - Set `enable-rcon=true`. Add this to your config if it doesn't exist.
@@ -60,7 +64,7 @@ chat or your registered Telegram chats.
  8. Save the `config.yml` file.
  9. Restart your Spigot server again.
  
-### Step 6: Web Component Configuration
+### Step 6: Web component configuration
  1. Open the `config.php` file on your web server and set the following 
  constants accordingly.
      - *MC_SERVER_ADDR*: The address of your Spigot server.
@@ -81,6 +85,17 @@ chat or your registered Telegram chats.
      - *TURTLEDUCK_HMAC*: The HMAC signing key that you generated in Step 2.
      - *TURTLEDUCK_TELEGRAM_TOKEN*: The API token that you received in Step 1.
  2. Save the `config.php` file.
+ 
+### Step 7: Configure the Webhook
+**TODO**
 
-### Step 7: Register a Telegram chat to receive messages
-TODO
+### Step 8: Register a Telegram chat to receive messages
+ 1. Start a conversation with your bot on Telegram. You can either initiate a 
+ regular chat with it, or add the bot and yourself to a new group.
+ 2. Send the `/register` command. If you are an allowed user, it should respond 
+ with "Registered successfully!"
+ 
+Now that you've registered this chat, all messages sent with /sos on your 
+Minecraft server will be forwarded to this chat. You can register up to 
+**five** Telegram chats to receive messages. To reply to a message, use the 
+"Reply To" action in Telegram.
