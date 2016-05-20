@@ -114,16 +114,14 @@ class Turtleduck {
             );
             $chatCheck->execute([$username]);
             
-            if($row = $chatCheck->fetch()) {
-                return true;
-            }
+            return ($chatCheck->fetch() !== false);
         }
         
         return false;
     }
 
     public function registerChat($chatID, $username) {
-        if($this->isUserAllowed($username)) {
+        if($this->pdo && $this->isUserAllowed($username)) {
             $insert = $this->pdo->prepare('
                 INSERT INTO turtleduck_chats 
                 (chat_id, registration_time) 
