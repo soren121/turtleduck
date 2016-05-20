@@ -16,12 +16,12 @@ web server which acts as a middle-man between the Telegram API and your Spigot
 server, and a Java plugin for Spigot that connects to the web server.
 
 Runtime requirements:
- * A web server running PHP 5.6+ and MySQL 5.5/MariaDB 10.0.
- * Java JRE 8u40+.
- * Spigot 1.8+ with RCON enabled. (Tested with 1.8.8 only.)
+ * A web server running PHP 5.6+ and MySQL 5.5+/MariaDB 10.0+.
+ * Java JRE 8u72+.
+ * Spigot 1.9+ with RCON enabled.
 
 Compile-time requirements (for the Spigot plugin):
- * Java JDK 8u40+.
+ * Java JDK 8u72+.
  * Maven 3.2+.
  
 ## Installation

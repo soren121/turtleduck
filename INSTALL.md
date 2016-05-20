@@ -1,26 +1,30 @@
 # Installing Turtleduck
 
-This software has a lot of interconnected parts, so bear with me, this will 
+This software has a lot of interconnected parts, so bear with me; this will 
 take a bit more time to put together than the average Spigot plugin.
 
 ### Step 1: Register with Telegram
- 1. Obtain a Telegram Bot API token from the @BotFather account. Instructions 
- can be found here: https://core.telegram.org/bots#6-botfather
+Turtleduck makes use of the [Telegram Bot API](https://core.telegram.org/bots).
+Use of the API is completely free, though you will have to register an account 
+for your new bot.
+
+ 1. Obtain a Telegram Bot API token from the @BotFather account on Telegram. 
+ [Instructions can be found here.](https://core.telegram.org/bots#6-botfather)
  2. Save the API token that the bot gives you. You'll need it later.
  
 ### Step 2: Generate the HMAC Signing Key
- Turtleduck uses a 16-bit hexadecimal key to sign its internal requests. This 
- ensures that outsiders cannot abuse Turtleduck to spam your Minecraft server 
- chat or your registered Telegram chats.
+Turtleduck uses a 16-byte hexadecimal key to sign its internal requests. This 
+ensures that outsiders cannot abuse Turtleduck to spam your Minecraft server 
+chat or your registered Telegram chats.
  
  1. A Python script named `generate-hmac.py` is included in the base directory 
-    of this repo that will generate the key for you. Run it in your terminal to 
-    generate a key. (You will need Python 2 or 3 installed.)
+ of this repo that will generate the key for you. Run it in your terminal to 
+ generate a key. (You will need Python 2 or 3 installed.)
  2. Save the generated HMAC key for later.
  
 ### Step 3: Install the Web Component
  1. Extract the contents of the web-component directory to a 
-    publicly-accessible directory on your web server.
+ publicly-accessible directory on your web server.
  2. Install [Composer](https://getcomposer.org/) if you haven't already.
  3. Open a shell where you extracted the web-component directory.
  4. Run `composer install` to download the requisite dependencies.
@@ -28,7 +32,7 @@ take a bit more time to put together than the average Spigot plugin.
 ### Step 4: Database Setup
  1. Create a new database on your MySQL server, if you wish.
  2. Import the `install.sql` file from the web-component directory into your 
-    MySQL database.
+ MySQL database.
  3. To add allowed users, simply add new rows to the `turtleduck_allowed_users`
  table. The username column is the Telegram username you wish to allow, and 
  you don't need to set anything in the *date_added* column (it will be 
@@ -79,4 +83,4 @@ take a bit more time to put together than the average Spigot plugin.
  2. Save the `config.php` file.
 
 ### Step 7: Register a Telegram chat to receive messages
- TODO
+TODO
