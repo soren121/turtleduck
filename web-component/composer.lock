@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f97e668948d187b36ac0f3f1fa4fa0b2",
-    "content-hash": "b15bf67996b280fd1a084d1cce96c54f",
+    "hash": "7f26262e47adcc34d4c93463406697fc",
+    "content-hash": "563c3b32fa304b254d752ae02ca04b98",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -226,39 +226,6 @@
                 "response"
             ],
             "time": "2015-05-04 20:22:00"
-        },
-        {
-            "name": "xpaw/php-minecraft-query",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/xPaw/PHP-Minecraft-Query.git",
-                "reference": "828161dda59fc8a542c912afb019b36d6371f54c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/xPaw/PHP-Minecraft-Query/zipball/828161dda59fc8a542c912afb019b36d6371f54c",
-                "reference": "828161dda59fc8a542c912afb019b36d6371f54c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "xPaw\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHP library to query Minecraft servers",
-            "keywords": [
-                "minecraft"
-            ],
-            "time": "2015-10-06 07:59:49"
         },
         {
             "name": "xpaw/php-source-query-class",
