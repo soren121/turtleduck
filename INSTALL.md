@@ -1,4 +1,4 @@
-# Turtleduck Installation Instructions
+# Installing Turtleduck
 
 This software has a lot of interconnected parts, so bear with me, this will 
 take a bit more time to put together than the average Spigot plugin.
@@ -18,23 +18,23 @@ take a bit more time to put together than the average Spigot plugin.
  generate a key. (You will need Python 2 or 3 installed.)
  2. Save the generated HMAC key for later.
  
-### Step 2: Install the Web Component
+### Step 3: Install the Web Component
  1. Extract the contents of the web-component directory to a 
  publicly-accessible directory on your web server.
  2. Install [Composer](https://getcomposer.org/) if you haven't already.
  3. Open a shell where you extracted the web-component directory.
  4. Run `composer install` to download the requisite dependencies.
 
-### Step 3: Database Setup
+### Step 4: Database Setup
  1. Create a new database on your MySQL server, if you wish.
- 2. Import the `install.sql` file in the root of this repo into your MySQL 
- database.
+ 2. Import the `install.sql` file from the web-component directory into your 
+ MySQL database.
  3. To add allowed users, simply add new rows to the `turtleduck_allowed_users`
  table. The username column is the Telegram username you wish to allow, and you 
  don't need to set anything in the *date_added* column (it will be updated 
  automatically.)
 
-### Step 4: Spigot Configuration
+### Step 5: Spigot Configuration
  1. Open your Spigot server's `server.properties` file.
  2. Enable RCON.
   - Set `enable-rcon=true`. Add this to your config if it doesn't exist.
@@ -56,7 +56,7 @@ take a bit more time to put together than the average Spigot plugin.
  8. Save the `config.yml` file.
  9. Restart your Spigot server again.
  
-### Step 4: Web Component Configuration
+### Step 6: Web Component Configuration
  1. Open the `config.php` file on your web server and set the following 
  constants accordingly.
    - *MC_SERVER_ADDR*: The address of your Spigot server.
@@ -67,16 +67,16 @@ take a bit more time to put together than the average Spigot plugin.
    - *RCON_PORT*: The port that your Spigot server's RCON (remote console) 
    service runs on. Usually, this is 25575 unless you changed it in Spigot's 
    `server.properties`.
-   - *RCON_PASSWORD*: The RCON password that you set in Step 4.
+   - *RCON_PASSWORD*: The RCON password that you set in Step 5.
    - *DB_HOSTNAME*: The hostname of your MySQL server. If it's on the same
    machine as your web server, then `localhost` should suffice.
-   - *DB_NAME*: The name of the database you setup in Step 3.
-   - DB_PORT: The port that your MySQL server runs on. Usually 3306.
-   - DB_USER: The name of the MySQL user that this application will use.
-   - DB_PASS: The password of the MySQL user that this application will use.
-   - TURTLEDUCK_HMAC: The HMAC signing key that you generated in Step 2.
-   - TURTLEDUCK_TELEGRAM_TOKEN: The API token that you received in Step 1.
+   - *DB_NAME*: The name of the database you setup in Step 4.
+   - *DB_PORT*: The port that your MySQL server runs on. Usually 3306.
+   - *DB_USER*: The name of the MySQL user that this application will use.
+   - *DB_PASS*: The password of the MySQL user that this application will use.
+   - *TURTLEDUCK_HMAC*: The HMAC signing key that you generated in Step 2.
+   - *TURTLEDUCK_TELEGRAM_TOKEN*: The API token that you received in Step 1.
  2. Save the `config.php` file.
 
-### Step 5: Register a Telegram Chat to receive messages
+### Step 7: Register a Telegram chat to receive messages
  TODO

@@ -31,7 +31,7 @@ class Turtleduck {
         if($response->getStatusCode() >= 500) {
             return false;
         }
-        else if($response->getStatusCode() >= 300) {
+        elseif($response->getStatusCode() >= 300) {
             error_log("Turtleduck: " . $response->getReasonPhrase());
             if($response->getStatusCode() == 401) {
                 throw new Exception('Invalid access token provided');
@@ -99,12 +99,12 @@ class Turtleduck {
         
         return $this->handleTelegramResponse($response);
     }
-
-    public function registerChat($chatID, $username) {
+    
+    // Check that the user is allowed to register chats
+    // and that we haven't exceeded the maximum number of
+    // registered chats
+    public function isUserAllowed($username) {
         if($this->pdo) {
-            // Check that the user is allowed to register chats
-            // and that we haven't exceeded the maximum number of
-            // registered chats
             $chatCheck = $this->pdo->prepare('
                 SELECT username
                 FROM turtleduck_allowed_users
@@ -115,14 +115,22 @@ class Turtleduck {
             $chatCheck->execute([$username]);
             
             if($row = $chatCheck->fetch()) {
-                $insert = $this->pdo->prepare('
-                    INSERT INTO turtleduck_chats 
-                    (chat_id, registration_time) 
-                    VALUES(?, NOW())'
-                );
-                
-                return $insert->execute([$chatID]);
+                return true;
             }
+        }
+        
+        return false;
+    }
+
+    public function registerChat($chatID, $username) {
+        if($this->isUserAllowed($username)) {
+            $insert = $this->pdo->prepare('
+                INSERT INTO turtleduck_chats 
+                (chat_id, registration_time) 
+                VALUES(?, NOW())'
+            );
+            
+            return $insert->execute([$chatID]);
         }
         
         return false;

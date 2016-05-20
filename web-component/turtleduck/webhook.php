@@ -21,14 +21,14 @@ require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/turtleduck.php';
 
 function webhookRequest($method, $parameters) {
-    if (!is_string($method)) {
+    if(!is_string($method)) {
         error_log("Method name must be a string\n");
         return false;
     }
-    if (!$parameters) {
+    if(!$parameters) {
         $parameters = array();
     }
-    else if (!is_array($parameters)) {
+    elseif(!is_array($parameters)) {
         error_log("Parameters must be an array\n");
         return false;
     }
@@ -57,7 +57,7 @@ function processMessage($td, $message){
         if (strpos($text, "/start") === 0) {
             webhookRequest("sendMessage", array(
                 'chat_id' => $chat_id,
-                "text" => 'TurtleduckBot, reporting for duty!'
+                "text" => 'Turtleduck bot, reporting for duty!'
             ));
         }
         // Deregister chat
@@ -90,9 +90,7 @@ function processMessage($td, $message){
             ));
         }
         else if(strpos($text, "/broadcast") === 0) {
-            $authorizedUsers = ['soren121', 'ferrettt55'];
-            
-            if(in_array($username, $authorizedUsers) && strlen($text) >= 12) {
+            if($td->isUserAllowed($username) && strlen($text) >= 12) {
                 $td->forwardToSpigot($username, substr($text, 11));
             }
             else {
@@ -128,14 +126,11 @@ if(isset($_GET['token']) && hash_equals($_GET['token'], TURTLEDUCK_TELEGRAM_TOKE
     $content = file_get_contents("php://input");
     $update = json_decode($content, true);
 
-    if (!$update) {
-        // receive wrong update
-        exit;
-    }
-
-    $td = new Turtleduck();
-    if (isset($update["message"])) {
-        processMessage($td, $update["message"]);
+    if($update) {
+        $td = new Turtleduck();
+        if(isset($update["message"])) {
+            processMessage($td, $update["message"]);
+        }
     }
 }
 else {

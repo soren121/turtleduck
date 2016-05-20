@@ -53,12 +53,12 @@ public class MessageSender {
     
     private String toHexString(byte[] bytes) {
         Formatter formatter = new Formatter();
-		
-		for (byte b : bytes) {
-			formatter.format("%02x", b);
-		}
+        
+        for(byte b : bytes) {
+            formatter.format("%02x", b);
+        }
 
-		return formatter.toString();
+        return formatter.toString();
     }
     
     private String buildBodyString(List<NameValuePair> params) {
@@ -119,7 +119,7 @@ public class MessageSender {
             HttpResponse response = httpClient.execute(httpPost);
             StatusLine statusLine = response.getStatusLine();
             if (statusLine.getStatusCode() >= 300) {
-                this.logger.severe("Message response was " + statusLine.getStatusCode());
+                this.logger.severe("Received HTTP code " + statusLine.getStatusCode());
                 return false;
             }
         }

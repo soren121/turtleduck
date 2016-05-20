@@ -7,15 +7,15 @@ main: com.sorenstudios.turtleduck.Turtleduck
 
 commands:
     sos:
-        description: "Contacts the admins for...emergencies, hopefully."
+        description: "Sends an instant message to the server operators."
         usage: "/<command> [message]"
         aliases: batsignal
         permission: turtleduck.sos
-        permission-message: "You don't have permission to contact the admins."
+        permission-message: "You don't have permission to contact the operators."
     tdsay:
         usage: "/<command> [username] '[message]'"
       
 permissions:
     turtleduck.sos:
-        description: "Allows a player to contact the admins immediately."
+        description: "Allows a player to send an instant message to the server operators."
         default: true
