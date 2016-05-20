@@ -124,11 +124,11 @@ class Turtleduck {
         if($this->pdo && $this->isUserAllowed($username)) {
             $insert = $this->pdo->prepare('
                 INSERT INTO turtleduck_chats 
-                (chat_id, registration_time) 
-                VALUES(?, NOW())'
+                (chat_id, registered_by, registration_time) 
+                VALUES(?, ?, NOW())'
             );
             
-            return $insert->execute([$chatID]);
+            return $insert->execute([$chatID, $username]);
         }
         
         return false;
@@ -150,7 +150,7 @@ class Turtleduck {
     
     public function broadcastMessage($message) {
         if($this->pdo) {
-            $chats = $this->pdo->query('SELECT * FROM turtleduck_chats LIMIT 5');
+            $chats = $this->pdo->query('SELECT chat_id FROM turtleduck_chats LIMIT 5');
             if($chats !== false) {
                 foreach($chats as $row) {
                     $this->telegramRequestPost("sendMessage", array(
